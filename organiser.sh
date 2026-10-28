@@ -1,8 +1,6 @@
-
 #!/bin/bash
 
-# Check how many arguments the user provides
-if [ "$#" -gt 0 ]; then
+if [ "$#" -gt 0 ]; then # Check how many arguments the user provides
     folder="$1"
 
     # Check if the provided folder exists
