@@ -73,11 +73,59 @@ if [ "$#" -gt 0 ]; then
                 # Check if the category folder exists
                 mkdir -p "$destination"
 
+                # RENAME DUPLICATES = DONOT OVERWRITE
+                #================================================
+
+                #define initial path inside destination.
+                target="$destination"
+
+
+                # If a file with this identical name already exists, change the target name
+                if [ -e "$target" ]; then
+                    counter=1
+
+                    # Separate the filename base from its extension
+                    if [ "$filename" != "$extension" ]; then
+                        base="${filename%.*}"   # Gets "photo" from "photo.jpg"
+                        file_ext="${filename##*.}" # Gets "jpg" from "photo.jpg"
+                    else
+                        base="$filename"
+                        file_ext=""
+                    fi
+
+                    # Loop and check files incrementally until we find a free name slot
+                    while [ -e "$target" ]; do
+                        if [ -n "$file_ext" ]; then
+                            target="$destination/$base($counter).$file_ext"
+                        else
+                            target="$destination/$base($counter)"
+                        fi
+                        counter=$((counter + 1))
+                    done
+                fi
+
+                #SAFELY MOVE FILE TO VERIFIED TARGET PATH
+                #==========================================
+
+                if mv -- "$file" "$target"; then
+                    # Get just the final filename used (handles original)
+                    final_name="${target##*/}"
+                    echo "$filename -> $category/$final_name"
+                    count_move=$((count_move + 1))
+                else
+                    echo "Error: Failed to move $filename" >&2
+                fi
+
                 # Display the filename and its category
                 echo "$filename -> $category"
 
             fi
         done
+
+        # printing final output
+        # ========================
+        echo "Total files moved: $count_move"
+        
     else
         echo "Error: Folder '$folder' does not exist." >&2
         exit 1
