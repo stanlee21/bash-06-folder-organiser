@@ -64,6 +64,17 @@ if [ "$#" -gt 0 ]; then
                     fi
                 fi
 
+                # variable for category folder
+                destination="$folder/$category"
+
+                # Check if the category folder exists
+                if [ -d "$destination" ]; then
+                    echo "Category folder already exists in: $destination"
+                else
+                    # Create the category folder
+                    mkdir "$destination"
+                fi
+
                 # Display the filename and its category
                 echo "$filename -> $category"
 
