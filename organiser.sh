@@ -136,3 +136,4 @@ else
     echo "Error: Please provide a folder to organise." >&2
     exit 1
 fi
+
