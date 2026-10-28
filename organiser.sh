@@ -1,13 +1,16 @@
 
 #!/bin/bash
 
-# Check if the user provided a folder argument
+# Check how many arguments the user provides
 if [ "$#" -gt 0 ]; then
     folder="$1"
 
     # Check if the provided folder exists
     if [ -d "$folder" ]; then
         echo "Organising: $folder"
+
+        #counting the number of files moved correctly
+        count_move=0
 
             #sorting items directily inside the folder.
             for file in "$folder"/*; do
@@ -64,16 +67,11 @@ if [ "$#" -gt 0 ]; then
                     fi
                 fi
 
-                # variable for category folder
+                # variable for category folder creation
                 destination="$folder/$category"
 
                 # Check if the category folder exists
-                if [ -d "$destination" ]; then
-                    echo "Category folder already exists in: $destination"
-                else
-                    # Create the category folder
-                    mkdir "$destination"
-                fi
+                mkdir -p "$destination"
 
                 # Display the filename and its category
                 echo "$filename -> $category"
