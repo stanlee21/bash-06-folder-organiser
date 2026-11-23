@@ -74,9 +74,8 @@ if [ "$#" -gt 0 ]; then # Check how many arguments the user provides
                 # RENAME DUPLICATES = DONOT OVERWRITE
                 #================================================
 
-                #define initial path inside destination.
-                target="$destination"
-
+                # Define initial path inside destination
+                target="$destination/$filename"
 
                 # If a file with this identical name already exists, change the target name
                 if [ -e "$target" ]; then
@@ -84,8 +83,8 @@ if [ "$#" -gt 0 ]; then # Check how many arguments the user provides
 
                     # Separate the filename base from its extension
                     if [ "$filename" != "$extension" ]; then
-                        base="${filename%.*}"   # Gets "photo" from "photo.jpg"
-                        file_ext="${filename##*.}" # Gets "jpg" from "photo.jpg"
+                        base="${filename%.*}"
+                        file_ext="${filename##*.}"
                     else
                         base="$filename"
                         file_ext=""
@@ -134,4 +133,3 @@ else
     echo "Error: Please provide a folder to organise." >&2
     exit 1
 fi
-
