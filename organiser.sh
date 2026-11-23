@@ -1,7 +1,6 @@
 #!/bin/bash
 
-if [ "$#" -gt 0 ]; then # Check how many arguments the user provides
-    folder="$1"
+folder="${1:-.}"
 
     # Check if the provided folder exists
     if [ -d "$folder" ]; then
@@ -113,9 +112,6 @@ if [ "$#" -gt 0 ]; then # Check how many arguments the user provides
                     echo "Error: Failed to move $filename" >&2
                 fi
 
-                # Display the filename and its category
-                echo "$filename -> $category"
-
             fi
         done
 
@@ -127,9 +123,3 @@ if [ "$#" -gt 0 ]; then # Check how many arguments the user provides
         echo "Error: Folder '$folder' does not exist." >&2
         exit 1
     fi
-
-else
-    # No folder argument was provided
-    echo "Error: Please provide a folder to organise." >&2
-    exit 1
-fi
