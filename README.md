@@ -10,16 +10,17 @@ This project demonstrates the use of Bash scripting, command-line arguments, con
 
 ## 2. Features
 
-- **Directory validation:** Checks that the user provides a folder path and that the folder exists.
+- **Directory validation:** Checks whether the specified folder exists.
+- **Default directory:** Uses the current working directory when no folder argument is provided.
 - **Automatic categorization:** Sorts files into folders according to their extensions.
 - **Case-insensitive extension handling:** Recognizes extensions such as `.JPG`, `.jpg`, and `.Jpg` as the same file type.
 - **Automatic folder creation:** Creates category folders when needed.
-- **Safe file handling:** Avoids overwriting files that already exist in the destination.
+- **Safe file handling:** Avoids overwriting existing files.
 - **Duplicate filename handling:** Renames conflicting files by adding a number, such as `photo(1).jpg` and `photo(2).jpg`.
 - **Top-level organization:** Processes files directly inside the specified folder without organizing files inside its subfolders.
-- **Progress messages:** Displays each successful file move.
+- **Progress messages:** Displays each successfully moved file.
 - **Final summary:** Reports the total number of files moved.
-- **Error handling:** Displays an error and exits when no folder is provided or the specified folder does not exist.
+- **Error handling:** Displays an error and exits when the specified folder does not exist.
 
 ## 3. File Categories
 
@@ -68,25 +69,27 @@ This gives the script permission to execute.
 
 ## 6. Usage
 
-The script requires a folder path as a command-line argument.
+The folder path is optional.
 
 ### Syntax
 
 ```bash
-./organise.sh <folder_path>
+./organise.sh [folder_path]
 ```
 
-### Example
-
-To organize files inside a folder named `Downloads`:
+### Example 1: Organize a specified folder
 
 ```bash
 ./organise.sh ~/Downloads
 ```
 
-Replace the example paths with the actual location of the folder you want to organize.
+### Example 2: Organize the current directory
 
-**Important:** Always provide the folder you intend to organize. The script does not automatically use the current directory when no argument is supplied.
+```bash
+./organise.sh
+```
+
+When no folder path is provided, the script automatically organizes files in the current working directory.
 
 ## 7. Example
 
@@ -140,7 +143,7 @@ Category folders are created only when needed.
 
 ### Example terminal output
 
-![alt text](<assets/img/Screenshot From 2026-10-28 13-45-56.png>)
+![alt text](<assets/img/Screenshot From 2026-11-23 21-35-30.png>)
 
 ![alt text](<assets/img/Screenshot From 2026-10-28 15-23-34.png>)
 
@@ -164,21 +167,7 @@ This approach helps prevent accidental loss of files due to duplicate filenames.
 
 ## 9. Error Handling
 
-The script checks for common errors before organizing files.
-
-### No folder argument
-
-Command:
-
-```bash
-./organise.sh
-```
-
-Expected message:
-
-```text
-Error: Please provide a folder to organise.
-```
+The script validates the target directory before attempting to organize files.
 
 ### Folder does not exist
 
@@ -194,15 +183,15 @@ Expected message:
 Error: Folder 'missing_folder' does not exist.
 ```
 
-In both cases, the script exits with a non-zero status to indicate that it could not complete the requested operation.
+The script exits with a non-zero status when the specified directory does not exist.
 
-## 13. Conclusion
+## 10. Conclusion
 
 The Bash File Organizer automates a common file-management task through a simple command-line interface. It applies Bash programming concepts to solve a practical problem while taking care to avoid overwriting existing files and to leave subdirectories untouched.
 
 The project is a useful beginner exercise for developing skills in shell scripting, automation, and command-line file management.
 
 Tata Stanley Mbajing
-Junior FrontEnd Developer
-[📩 Email: (stanleymbajingtata@gmail.com)]
+Software Developer
+📩 Email: <stanleymbajingtata@gmail.com>
 🌍 Based in Cameroon | Open to remote opportunities
